@@ -741,6 +741,20 @@ p { text-wrap: pretty; }
 .cta-band h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); margin-bottom: 1rem; position: relative; }
 .cta-band p { position: relative; max-width: 58ch; margin: 0 auto; color: var(--muted); }
 .cta-band .btn { position: relative; margin-top: 2rem; }
+.cta-band--idea > .container { background: var(--ink); background-image: var(--grain); border-color: var(--ink); color: var(--on-dark); }
+.cta-band--idea > .container::before { border-color: rgba(176, 141, 87, .35); }
+.cta-band--idea h2 { color: var(--ivory); }
+.cta-band--idea p { color: var(--on-dark); }
+.cta-band__hint { display: block; margin-top: 1rem; font-size: .8rem; color: var(--brass-light); position: relative; }
+
+/* estilos (bajo el cluster de distribuciones) */
+.estilos { margin-top: clamp(2.5rem, 5vw, 4rem); }
+.estilos__title { text-align: center; font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 500; margin-bottom: 1.75rem; }
+.estilos__list { list-style: none; display: grid; gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
+@media (min-width: 768px) { .estilos__list { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .estilos__list { grid-template-columns: repeat(3, 1fr); } }
+.estilos__list li { background: var(--paper); padding: 1.4rem 1.5rem; font-size: .92rem; color: var(--muted); line-height: 1.55; }
+.estilos__list strong { display: block; margin-bottom: .35rem; font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; color: var(--ink); }
 
 /* ── 26. CONTACTO ──────────────────────────────────────────── */
 .contact-grid { display: grid; gap: clamp(2.5rem, 5vw, 4.5rem); align-items: start; }

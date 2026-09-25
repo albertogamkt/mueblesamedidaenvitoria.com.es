@@ -296,7 +296,22 @@ def service_node(cfg, site, url, text):
     offers = price_offers(text)
     if offers:
         node["offers"] = offers
+    catalog = cluster_catalog(text)
+    if catalog:
+        node["hasOfferCatalog"] = {"@type": "OfferCatalog", "name": catalog[0],
+                                   "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Product", "name": n}}
+                                                       for n in catalog[1]]}
     return node
+
+
+def cluster_catalog(text):
+    """Tipos de mueble del bloque <section data-cluster="muebles">: (título H2, [nombres de las tarjetas])."""
+    m = re.search(r'<section[^>]*data-cluster="muebles".*?</section>', text, re.S)
+    if not m:
+        return None
+    h2 = re.search(r"<h2[^>]*>(.*?)</h2>", m.group(0), re.S)
+    names = [strip_tags(t) for t in re.findall(r'class="service-card__title"[^>]*>(.*?)</h3>', m.group(0), re.S)]
+    return (strip_tags(h2.group(1)) if h2 else "Muebles a medida", names) if names else None
 
 
 def page_meta(text, pattern):

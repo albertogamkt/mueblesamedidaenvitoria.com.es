@@ -607,7 +607,10 @@ p { text-wrap: pretty; }
   .grid-trabajos > .trabajo-card:first-child:nth-last-child(n + 5) img { height: 100%; aspect-ratio: auto; }
   .grid-trabajos > .trabajo-card:first-child:nth-last-child(n + 5) .media-missing { aspect-ratio: auto; }
 }
-.trabajo-card { margin: 0; isolation: isolate; }
+.trabajo-card { position: relative; margin: 0; isolation: isolate; }
+.trabajo-card__link { color: inherit; }
+.trabajo-card__link::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.trabajo-card__link:hover, .trabajo-card__link:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
 .trabajo-card > picture { display: block; height: 100%; }
 .trabajo-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1.4s var(--ease); }
 .trabajo-card:hover img { transform: scale(1.04); }

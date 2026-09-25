@@ -10,32 +10,32 @@
 > `sites/Muebles a Medida en Vitoria/_ESTADO.md` y continúa por el PRÓXIMO PASO.
 > Sigue `resources/workflow-fases.md`.
 
-## Sistema global (desde 2026-09-25) — LEER ANTES DE EDITAR
-
-Rediseño premium aplicado a TODO el sitio desde estilos y plantillas, no página a página.
+## Sistema global (actualizado 2026-09-25 tras auditoría SEO) — LEER ANTES DE EDITAR
 
 | Qué quieres cambiar | Dónde | Luego |
 |---|---|---|
-| Teléfono, WhatsApp, email, dirección, horario, año de fundación | `site.config.json` | `python3 tools/build.py` |
-| Cabecera / menú | `partials/header.html` | `python3 tools/build.py` |
-| Pie de página | `partials/footer.html` | `python3 tools/build.py` |
-| Barra CTA móvil + WhatsApp flotante | `partials/mobile-bar.html` | `python3 tools/build.py` |
-| Fuentes, CSS e iconos del `<head>` | `partials/head-assets.html` | `python3 tools/build.py` |
-| Diseño (colores, tipografía, secciones) | `css/style.css` | `python3 tools/build.py` (genera `style.min.css`) |
+| Teléfono, WhatsApp, email, dirección, horario, NIF/titular, autor | `site.config.json` | `python3 tools/build.py` |
+| Cabecera / topbar / menú | `partials/header.html` | build |
+| Pie de página | `partials/footer.html` | build |
+| Formulario (todas las páginas) | `partials/form-lead.html` | build |
+| Barra CTA móvil + WhatsApp flotante | `partials/mobile-bar.html` | build |
+| `<head>` (fuentes, CSS crítico, iconos) | `partials/head-assets.html` | build |
+| Diseño | `css/style.css` | build (genera `style.min.css` + CSS crítico inline) |
 
-- `phone` en formato internacional (`+34945000000`), `phoneDisplay` como se lee (`945 00 00 00`),
-  `whatsapp` sin `+` (`34600000000`). Si se rellenan, aparecen solos: topbar, cabecera, menú móvil,
-  pie, barra móvil (Llamar/WhatsApp), botón flotante y `telephone` en el JSON-LD. Si se vacían, desaparecen.
-- Si cambias email/dirección/horario, el build también sustituye el valor antiguo dentro del contenido
-  de las páginas (estado guardado en `tools/.build-state.json`; no borrarlo).
-- `js/config.js` se GENERA desde `site.config.json` — no editarlo a mano.
-- Los bloques entre `<!-- @header -->…<!-- /@header -->` (y head-assets, footer, mobile-bar) se
-  sobrescriben en cada build: no editar dentro de ellos en las páginas.
-- Fuentes autoalojadas en `/fonts` (Cormorant Garamond + Manrope, OFL). Sin Google Fonts (RGPD + velocidad).
-- Fotos que falten se muestran como panel de material (js/main.js) — al subir las reales a `/img/`
-  con el mismo nombre, aparecen sin tocar HTML.
-- Línea visual: nogal profundo `#16110D`/`#2B1F17`, latón `#B08D57`, marfil `#F6F1E9`.
-  Sustituye a la paleta navy/lima anterior (el logo ya es el nuevo símbolo de armario en latón).
+- **Rutas absolutas desde la raíz** (`/css/…`, `/armarios-a-medida/`). Vista previa local: `python3 -m http.server 8090`
+  desde la raíz del repo (o `php -S 127.0.0.1:8090` para probar también el formulario).
+- **JSON-LD 100 % estático**: lo genera el build en el bloque `<!-- @schema -->` de cada página indexable
+  (negocio único `#negocio`, WebSite, WebPage, BreadcrumbList desde las migas visibles, Service + Offers desde
+  las `.precio-card`, FAQPage desde `.faq-item`, Person del autor). No escribir JSON-LD de negocio a mano.
+  Ya no existe `js/schema.js`.
+- **sitemap.xml se genera solo** (solo páginas `index, follow`; `lastmod` cambia cuando cambia el `<main>`).
+  Las legales, /gracias/ y 404 son `noindex, follow`: se rastrean pero no se indexan.
+- **Formulario**: `mail.php` + PHPMailer (`lib/PHPMailer`) por SMTP autenticado a info@. Credenciales en
+  `mail-config.php` (NO está en git; plantilla `mail-config.example.php`). Súbelo al servidor una vez,
+  idealmente junto a `public_html` (un nivel por encima). Límites de subida en `.user.ini`.
+- **Despliegue**: `python3 tools/build.py --zip` → `dist/mueblesamedidaenvitoria.com.es-AAAAMMDD.zip`
+  (excluye tools/, partials/, *.md, config y fuentes CSS). Descomprimir en la raíz pública del hosting.
+- Sin testimonios inventados, sin aggregateRating, sin showroom (taller con visitas con cita previa).
 
 ## PRÓXIMO PASO EXACTO
 

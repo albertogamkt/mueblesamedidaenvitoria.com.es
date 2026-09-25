@@ -5,5 +5,155 @@
   "hoursDisplay": "L-V 09:00–13:30 · 16:00–19:30",
   "phone": "",
   "phoneDisplay": "",
-  "mapsEmbedUrl": "https://maps.google.com/maps?q=Calle+Portal+de+Gamarra+14%2C+01013+Vitoria-Gasteiz%2C+%C3%81lava&t=&z=15&ie=UTF8&iwloc=&output=embed"
+  "mapsEmbedUrl": "https://maps.google.com/maps?q=Calle+Portal+de+Gamarra+14%2C+01013+Vitoria-Gasteiz%2C+%C3%81lava&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  "pages": {
+    "/404.html": {
+      "hash": "b2530df3",
+      "lastmod": "2026-09-25"
+    },
+    "/agurain-salvatierra/": {
+      "hash": "1a543406",
+      "lastmod": "2026-09-25"
+    },
+    "/alegria-dulantzi/": {
+      "hash": "aed53084",
+      "lastmod": "2026-09-25"
+    },
+    "/amurrio/": {
+      "hash": "95a7c8b5",
+      "lastmod": "2026-09-25"
+    },
+    "/armarios-a-medida/abuhardillados/": {
+      "hash": "9c253056",
+      "lastmod": "2026-09-25"
+    },
+    "/armarios-a-medida/correderos/": {
+      "hash": "c7120c3d",
+      "lastmod": "2026-09-25"
+    },
+    "/armarios-a-medida/empotrados/": {
+      "hash": "7a36dbf2",
+      "lastmod": "2026-09-25"
+    },
+    "/armarios-a-medida/esquineros/": {
+      "hash": "cbbd081e",
+      "lastmod": "2026-09-25"
+    },
+    "/armarios-a-medida/": {
+      "hash": "c8179374",
+      "lastmod": "2026-09-25"
+    },
+    "/armarios-a-medida/vestidores/": {
+      "hash": "29b4eb6c",
+      "lastmod": "2026-09-25"
+    },
+    "/banos-a-medida/": {
+      "hash": "c6ac6a1e",
+      "lastmod": "2026-09-25"
+    },
+    "/blog/aprovechar-hueco-bajo-escalera/": {
+      "hash": "446c32a8",
+      "lastmod": "2026-09-25"
+    },
+    "/blog/elegir-carpintero-muebles-a-medida-vitoria/": {
+      "hash": "bbee2545",
+      "lastmod": "2026-09-25"
+    },
+    "/blog/": {
+      "hash": "e448d6ab",
+      "lastmod": "2026-09-25"
+    },
+    "/blog/melamina-mdf-o-madera-maciza/": {
+      "hash": "9fb0574a",
+      "lastmod": "2026-09-25"
+    },
+    "/blog/muebles-a-medida-o-de-tienda/": {
+      "hash": "6b0e5d72",
+      "lastmod": "2026-09-25"
+    },
+    "/blog/precio-armario-a-medida-vitoria/": {
+      "hash": "ee275f0e",
+      "lastmod": "2026-09-25"
+    },
+    "/blog/precio-cocina-a-medida-vitoria/": {
+      "hash": "c4410f37",
+      "lastmod": "2026-09-25"
+    },
+    "/cocinas-a-medida/": {
+      "hash": "ae71a2f6",
+      "lastmod": "2026-09-25"
+    },
+    "/contacto/": {
+      "hash": "d390abae",
+      "lastmod": "2026-09-25"
+    },
+    "/dormitorios-a-medida/": {
+      "hash": "f0f1322d",
+      "lastmod": "2026-09-25"
+    },
+    "/escritorios-y-mobiliario-de-oficina-a-medida/": {
+      "hash": "fdf9baf2",
+      "lastmod": "2026-09-25"
+    },
+    "/gracias/": {
+      "hash": "5b32f4de",
+      "lastmod": "2026-09-25"
+    },
+    "/habitaciones-juveniles-a-medida/": {
+      "hash": "ad9ea19d",
+      "lastmod": "2026-09-25"
+    },
+    "/": {
+      "hash": "508dfedf",
+      "lastmod": "2026-09-25"
+    },
+    "/iruna-de-oca/": {
+      "hash": "728633c8",
+      "lastmod": "2026-09-25"
+    },
+    "/laudio-llodio/": {
+      "hash": "db0b4e28",
+      "lastmod": "2026-09-25"
+    },
+    "/legal/aviso-legal/": {
+      "hash": "7032d8cb",
+      "lastmod": "2026-09-25"
+    },
+    "/legal/cookies/": {
+      "hash": "a3328b97",
+      "lastmod": "2026-09-25"
+    },
+    "/legal/privacidad/": {
+      "hash": "1f9f5073",
+      "lastmod": "2026-09-25"
+    },
+    "/legutiano/": {
+      "hash": "483fcf19",
+      "lastmod": "2026-09-25"
+    },
+    "/mesas-a-medida/": {
+      "hash": "4d181d21",
+      "lastmod": "2026-09-25"
+    },
+    "/muebles-de-salon-a-medida/": {
+      "hash": "ff872558",
+      "lastmod": "2026-09-25"
+    },
+    "/nosotros/": {
+      "hash": "73150722",
+      "lastmod": "2026-09-25"
+    },
+    "/presupuesto/": {
+      "hash": "3d293705",
+      "lastmod": "2026-09-25"
+    },
+    "/recibidores-a-medida/": {
+      "hash": "9db0318f",
+      "lastmod": "2026-09-25"
+    },
+    "/trabajos/": {
+      "hash": "d7832f65",
+      "lastmod": "2026-09-25"
+    }
+  }
 }

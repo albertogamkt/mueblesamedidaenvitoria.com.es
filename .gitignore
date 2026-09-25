@@ -1,0 +1,5 @@
+# Credenciales SMTP: solo en el servidor (y en local), nunca en git
+mail-config.php
+# Zips de despliegue generados por tools/build.py --zip
+dist/
+__pycache__/

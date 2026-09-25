@@ -1,84 +1,94 @@
 # ════════════════════════════════════════════════════════════
-# .htaccess — Rank & Rent · Production Server Config
+# .htaccess — mueblesamedidaenvitoria.com.es · Producción (Apache 2.4)
+# Estructura del sitio: carpetas con index.html → URLs con barra final (/armarios-a-medida/)
 # ════════════════════════════════════════════════════════════
 
 Options -Indexes
+DirectoryIndex index.html
+DirectorySlash On
 RewriteEngine On
 
-# ── 1. FORZAR HTTPS (siempre primero) ─────────────────────
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# ── 1. HOST CANÓNICO: https + sin www (una sola redirección) ─
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
-# ── 2. ELIMINAR www → dominio raíz ────────────────────────
-# (Descomenta UNA de las dos opciones según convenga)
-# Sin www:
-# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-# RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
-# Con www:
-# RewriteCond %{HTTP_HOST} !^www\. [NC]
-# RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-# ── 2b. REDIRECCIONES 301 — reestructura armarios (subtipos anidados) ──
+# ── 2. REDIRECCIONES 301 — URLs antiguas ─────────────────────
 RewriteRule ^armarios-empotrados-a-medida/?$ /armarios-a-medida/empotrados/ [R=301,L]
 RewriteRule ^vestidores-a-medida/?$ /armarios-a-medida/vestidores/ [R=301,L]
 
-# ── 3. HOME en dominio raíz (redirigir /index.html → /) ───
-RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
-RewriteRule ^ / [R=301,L]
-
-# ── 4. URLS LIMPIAS: redirigir /pagina.html → /pagina ─────
-RewriteCond %{THE_REQUEST} \s/(.+?)\.html[\s?] [NC]
+# ── 3. /carpeta/index.html y /index.html → /carpeta/ ─────────
+RewriteCond %{THE_REQUEST} \s/+((?:[^\s?]*/)?)index\.html[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L]
 
-# ── 5. REESCRITURA INTERNA: /pagina → /pagina.html ────────
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.+?)/?$ $1.html [L]
+# ── 4. /pagina.html → /pagina/ (si existe la carpeta) ────────
+RewriteCond %{THE_REQUEST} \s/+([^\s?]+?)\.html[\s?] [NC]
+RewriteCond %{DOCUMENT_ROOT}/%1/index.html -f
+RewriteRule ^ /%1/ [R=301,L]
 
-# ── 6. TRAILING SLASH: /pagina/ → /pagina ─────────────────
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)/$ /$1 [R=301,L]
-
-# ── 7. COMPRESIÓN GZIP ────────────────────────────────────
+# ── 5. COMPRESIÓN ─────────────────────────────────────────────
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css application/javascript application/json image/svg+xml application/xml text/xml application/manifest+json
+</IfModule>
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css application/javascript
-  AddOutputFilterByType DEFLATE application/json image/svg+xml
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/xml text/xml application/manifest+json
 </IfModule>
 
-# ── 8. CACHÉ DE ACTIVOS ESTÁTICOS ────────────────────────
+# ── 6. TIPOS MIME ─────────────────────────────────────────────
+AddType application/manifest+json .webmanifest
+AddType image/avif .avif
+AddType image/webp .webp
+AddType font/woff2 .woff2
+
+# ── 7. CACHÉ ──────────────────────────────────────────────────
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/html                 "access plus 1 hour"
+  ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType application/xml           "access plus 1 hour"
   ExpiresByType text/css                  "access plus 1 year"
   ExpiresByType application/javascript    "access plus 1 year"
   ExpiresByType image/webp                "access plus 1 year"
   ExpiresByType image/avif                "access plus 1 year"
   ExpiresByType image/jpeg                "access plus 1 year"
   ExpiresByType image/png                 "access plus 1 year"
-  ExpiresByType image/svg+xml            "access plus 1 year"
-  ExpiresByType font/woff2               "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
   ExpiresByType application/manifest+json "access plus 1 week"
 </IfModule>
 
-# ── 9. CABECERAS DE SEGURIDAD ─────────────────────────────
+# ── 8. CABECERAS DE SEGURIDAD ─────────────────────────────────
 <IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
-  <FilesMatch "\.(css|js|webp|avif|jpg|png|woff2)$">
+  # CSS/JS llevan ?v=hash en la URL → caché inmutable segura
+  <FilesMatch "\.(css|js|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(webp|avif|jpe?g|png|svg)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  # Páginas de error y agradecimiento: nunca en el índice
+  <FilesMatch "^404\.html$">
+    Header set X-Robots-Tag "noindex, follow"
   </FilesMatch>
 </IfModule>
 
-# ── 10. BLOQUEAR ARCHIVOS SENSIBLES ──────────────────────
-<FilesMatch "(\.htaccess|\.htpasswd|\.md|site\.config\.json|\.build-state\.json|\.py|\.env)$">
-  Order Allow,Deny
-  Deny from all
+# ── 9. BLOQUEAR ARCHIVOS SENSIBLES (sintaxis Apache 2.4) ─────
+<FilesMatch "(^\.|\.(md|py|json|ini|log|zip|bak|sql|lock)$|^mail-config.*\.php$|^composer\.)">
+  Require all denied
 </FilesMatch>
-RedirectMatch 404 ^/(tools|partials)(/.*)?$
+<FilesMatch "^manifest\.webmanifest$">
+  Require all granted
+</FilesMatch>
+RedirectMatch 404 ^/(tools|partials|lib|dist)(/.*)?$
 
-# ── 11. ERRORES PERSONALIZADOS ────────────────────────────
+# ── 10. PÁGINAS DE ERROR ──────────────────────────────────────
 ErrorDocument 404 /404.html
-ErrorDocument 403 /index.html
+ErrorDocument 403 /404.html

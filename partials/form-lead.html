@@ -1,0 +1,53 @@
+<form action="/mail.php" method="POST" enctype="multipart/form-data" class="{{formClass}}" data-page="{{page}}" data-placeholder="{{placeholder}}" data-rows="{{rows}}" data-submit="{{submitLabel}}" data-fid="{{fid}}" novalidate>
+            <div class="form-group">
+              <label for="{{fid}}nombre">Nombre *</label>
+              <input type="text" id="{{fid}}nombre" name="nombre" placeholder="Tu nombre y apellido" required autocomplete="name" maxlength="80" data-error="Indícanos tu nombre">
+              <span class="field-error" aria-live="polite"></span>
+            </div>
+            <div class="form-row form-row--2">
+              <div class="form-group">
+                <label for="{{fid}}telefono">Teléfono *</label>
+                <input type="tel" id="{{fid}}telefono" name="telefono" placeholder="612 345 678" required autocomplete="tel" inputmode="tel" maxlength="20" data-error="Indica un teléfono válido (9 dígitos)">
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+              <div class="form-group">
+                <label for="{{fid}}email">Email *</label>
+                <input type="email" id="{{fid}}email" name="email" placeholder="tu@email.com" required autocomplete="email" maxlength="120" data-error="Revisa tu email">
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="{{fid}}servicio">Tipo de mueble *</label>
+              <select id="{{fid}}servicio" name="servicio" required data-error="Elige el tipo de mueble">
+                <option value="">Selecciona una opción</option>
+                {{serviceOptions}}
+              </select>
+              <span class="field-error" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="{{fid}}mensaje">Cuéntanos tu proyecto *</label>
+              <textarea id="{{fid}}mensaje" name="mensaje" rows="{{rows}}" placeholder="{{placeholder}}" required maxlength="3000" data-error="Cuéntanos brevemente tu proyecto (medidas aproximadas, localidad…)"></textarea>
+              <span class="field-error" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="{{fid}}fotos">Fotos o planos del espacio (opcional)</label>
+              <input type="file" id="{{fid}}fotos" name="fotos[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,application/pdf" multiple data-max-files="6" data-max-mb="10" data-error="Máximo 6 archivos de hasta 10 MB (JPG, PNG, WEBP, HEIC o PDF)">
+              <span class="form-hint">Hasta 6 archivos (JPG, PNG, HEIC o PDF). Una foto del hueco nos ayuda a darte un precio más ajustado.</span>
+              <span class="form-files" aria-live="polite"></span>
+              <span class="field-error" aria-live="polite"></span>
+            </div>
+            <div style="display:none" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+            <input type="hidden" name="page" value="{{page}}">
+            <input type="hidden" name="_ts" value="">
+            <div class="form-group form-group--checkbox">
+              <label class="checkbox-label">
+                <input type="checkbox" name="rgpd" value="1" required data-error="Necesitamos tu consentimiento para responderte">
+                <span>He leído y acepto la <a href="/legal/privacidad/" target="_blank" rel="noopener">política de privacidad</a> *</span>
+              </label>
+              <span class="field-error" aria-live="polite"></span>
+            </div>
+            <p class="form-legal"><strong>Protección de datos:</strong> {{businessName}} tratará tus datos solo para responder a tu solicitud y enviarte el presupuesto, con base en tu consentimiento. No los cedemos a terceros ni te enviaremos publicidad. Puedes ejercer tus derechos de acceso, rectificación y supresión escribiendo a <a href="mailto:{{email}}">{{email}}</a>.</p>
+            <p class="form-send-error" role="alert" style="display:none">No se pudo enviar. Inténtalo de nuevo o escríbenos a <a href="mailto:{{email}}">{{email}}</a>.</p>
+            <button type="submit" class="btn btn--primary btn--full">{{submitLabel}}</button>
+            <p class="form-assurance">Sin compromiso · {{responseTime}}</p>
+          </form>

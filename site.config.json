@@ -3,7 +3,7 @@
   "schemaType": "HomeAndConstructionBusiness",
   "priceRange": "€€",
   "since": "2006",
-
+  "foundingDate": "2006",
   "address": {
     "street": "Calle Portal de Gamarra, 14, nave 3",
     "city": "Vitoria-Gasteiz",
@@ -11,52 +11,161 @@
     "postalCode": "01013",
     "country": "ES"
   },
-
+  "workshopNote": "Taller de fabricación sin exposición al público: visitas al taller solo con cita previa",
+  "areaLabel": "Polígono de Gamarra, Vitoria-Gasteiz",
   "phone": "",
   "phoneDisplay": "",
   "whatsapp": "",
   "whatsappMessage": "Hola%2C%20necesito%20un%20presupuesto%20de%20muebles%20a%20medida",
   "email": "info@mueblesamedidaenvitoria.com.es",
-
   "hoursDisplay": "L-V 09:00–13:30 · 16:00–19:30",
   "hours": [
-    { "days": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "13:30" },
-    { "days": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "16:00", "closes": "19:30" }
+    {
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "13:30"
+    },
+    {
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "16:00",
+      "closes": "19:30"
+    }
   ],
-
-  "geo": { "lat": 42.8584, "lng": -2.6691 },
+  "hoursNote": "Sábados, visitas y mediciones con cita previa",
+  "responseTime": "Respuesta en 24–48 h laborables",
+  "geo": {
+    "lat": 42.8584,
+    "lng": -2.6691
+  },
   "keyword": "muebles a medida vitoria",
   "domain": "mueblesamedidaenvitoria.com.es",
-
   "gtmId": "",
   "gtagId": "",
   "mapsEmbedUrl": "https://maps.google.com/maps?q=Calle+Portal+de+Gamarra+14%2C+01013+Vitoria-Gasteiz%2C+%C3%81lava&t=&z=15&ie=UTF8&iwloc=&output=embed",
   "sameAs": [],
-  "rating": { "value": "4.9", "count": "47" },
-
   "services": [
-    { "name": "Armarios a medida", "slug": "armarios-a-medida" },
-    { "name": "Armarios empotrados a medida", "slug": "armarios-a-medida/empotrados" },
-    { "name": "Vestidores a medida", "slug": "armarios-a-medida/vestidores" },
-    { "name": "Armarios correderos a medida", "slug": "armarios-a-medida/correderos" },
-    { "name": "Armarios abuhardillados a medida", "slug": "armarios-a-medida/abuhardillados" },
-    { "name": "Armarios esquineros a medida", "slug": "armarios-a-medida/esquineros" },
-    { "name": "Cocinas a medida", "slug": "cocinas-a-medida" },
-    { "name": "Muebles de baño a medida", "slug": "banos-a-medida" },
-    { "name": "Muebles de salón a medida", "slug": "muebles-de-salon-a-medida" },
-    { "name": "Dormitorios a medida", "slug": "dormitorios-a-medida" },
-    { "name": "Habitaciones juveniles a medida", "slug": "habitaciones-juveniles-a-medida" },
-    { "name": "Escritorios y mobiliario de oficina a medida", "slug": "escritorios-y-mobiliario-de-oficina-a-medida" },
-    { "name": "Recibidores a medida", "slug": "recibidores-a-medida" },
-    { "name": "Mesas a medida", "slug": "mesas-a-medida" }
+    {
+      "name": "Armarios a medida",
+      "slug": "armarios-a-medida"
+    },
+    {
+      "name": "Armarios empotrados a medida",
+      "slug": "armarios-a-medida/empotrados"
+    },
+    {
+      "name": "Vestidores a medida",
+      "slug": "armarios-a-medida/vestidores"
+    },
+    {
+      "name": "Armarios correderos a medida",
+      "slug": "armarios-a-medida/correderos"
+    },
+    {
+      "name": "Armarios abuhardillados a medida",
+      "slug": "armarios-a-medida/abuhardillados"
+    },
+    {
+      "name": "Armarios esquineros a medida",
+      "slug": "armarios-a-medida/esquineros"
+    },
+    {
+      "name": "Puertas e interiores de armario a medida",
+      "slug": "armarios-a-medida/puertas-e-interiores"
+    },
+    {
+      "name": "Cocinas a medida",
+      "slug": "cocinas-a-medida"
+    },
+    {
+      "name": "Muebles de baño a medida",
+      "slug": "banos-a-medida"
+    },
+    {
+      "name": "Muebles de salón a medida",
+      "slug": "muebles-de-salon-a-medida"
+    },
+    {
+      "name": "Dormitorios a medida",
+      "slug": "dormitorios-a-medida"
+    },
+    {
+      "name": "Habitaciones juveniles a medida",
+      "slug": "habitaciones-juveniles-a-medida"
+    },
+    {
+      "name": "Escritorios y mobiliario de oficina a medida",
+      "slug": "escritorios-y-mobiliario-de-oficina-a-medida"
+    },
+    {
+      "name": "Recibidores a medida",
+      "slug": "recibidores-a-medida"
+    },
+    {
+      "name": "Mesas a medida",
+      "slug": "mesas-a-medida"
+    }
   ],
-
   "zones": [
-    { "name": "Laudio/Llodio", "slug": "laudio-llodio" },
-    { "name": "Amurrio", "slug": "amurrio" },
-    { "name": "Agurain/Salvatierra", "slug": "agurain-salvatierra" },
-    { "name": "Alegría-Dulantzi", "slug": "alegria-dulantzi" },
-    { "name": "Iruña de Oca", "slug": "iruna-de-oca" },
-    { "name": "Legutiano", "slug": "legutiano" }
+    {
+      "name": "Laudio/Llodio",
+      "slug": "laudio-llodio"
+    },
+    {
+      "name": "Amurrio",
+      "slug": "amurrio"
+    },
+    {
+      "name": "Agurain/Salvatierra",
+      "slug": "agurain-salvatierra"
+    },
+    {
+      "name": "Alegría-Dulantzi",
+      "slug": "alegria-dulantzi"
+    },
+    {
+      "name": "Iruña de Oca",
+      "slug": "iruna-de-oca"
+    },
+    {
+      "name": "Legutiano",
+      "slug": "legutiano"
+    }
+  ],
+  "legal": {
+    "owner": "",
+    "nif": ""
+  },
+  "author": {
+    "id": "gorka-saez-de-argandona",
+    "name": "Gorka Sáez de Argandoña",
+    "jobTitle": "Ebanista y diseñador de mobiliario a medida",
+    "image": "/img/equipo/autor.webp",
+    "sameAs": []
+  },
+  "knowsAbout": [
+    "Muebles a medida",
+    "Carpintería a medida",
+    "Ebanistería",
+    "Armarios empotrados",
+    "Vestidores",
+    "Cocinas a medida",
+    "Muebles de baño",
+    "Muebles de salón",
+    "Melamina",
+    "MDF lacado",
+    "Madera maciza",
+    "Chapa natural de roble y nogal"
   ]
 }

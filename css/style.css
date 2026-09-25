@@ -7,9 +7,9 @@
    ════════════════════════════════════════════════════════════ */
 
 /* ── 0. FUENTES (autoalojadas, subconjunto latino, OFL) ─────── */
-@font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500 600; font-display: swap; src: url('../fonts/cormorant-garamond-var.woff2') format('woff2'); }
-@font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 500; font-display: swap; src: url('../fonts/cormorant-garamond-italic-500.woff2') format('woff2'); }
-@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('../fonts/manrope-var.woff2') format('woff2'); }
+@font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500 600; font-display: swap; src: url('/fonts/cormorant-garamond-var.woff2') format('woff2'); }
+@font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 500; font-display: swap; src: url('/fonts/cormorant-garamond-italic-500.woff2') format('woff2'); }
+@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/fonts/manrope-var.woff2') format('woff2'); }
 
 /* ── 1. TOKENS ─────────────────────────────────────────────── */
 :root {
@@ -205,6 +205,18 @@ p { text-wrap: pretty; }
 .topbar__link { transition: color .3s; }
 .topbar__link:hover { color: var(--ivory); }
 .topbar__link svg, .topbar__info svg { color: var(--brass); }
+.header__topbar-right > li { display: flex; align-items: center; }
+.topbar__cta {
+  display: inline-flex; align-items: center; gap: .4rem; padding: .32rem .8rem; margin-block: .3rem;
+  background: var(--brass); color: var(--ink); font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; white-space: nowrap; transition: background .3s var(--ease);
+}
+.topbar__cta:hover { background: var(--brass-light); }
+.nav-main__meta { display: none; }
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .topbar__claim, .topbar__item--place { display: none; }
+  .header__topbar-inner { justify-content: flex-end; }
+}
 
 .header__main { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 84px; transition: min-height .4s var(--ease); }
 .site-header.scrolled .header__main { min-height: 70px; }
@@ -314,12 +326,21 @@ p { text-wrap: pretty; }
   .submenu-sub { margin-left: .25rem; }
   .submenu-sub a { padding-left: .85rem; }
   .nav-main__footer { display: grid; gap: .9rem; margin-top: auto; padding-top: 2rem; }
+  .nav-main__meta { display: block; font-size: .8rem; line-height: 1.6; color: var(--muted); text-align: center; }
+  .topbar__item--place, .topbar__item--hours { display: none !important; }
   .nav-main__contact { font-size: .9rem !important; font-weight: 600 !important; letter-spacing: .02em !important; text-transform: none !important; color: var(--muted) !important; text-align: center; padding: .25rem !important; }
   body.menu-open { overflow: hidden; }
   body.menu-open::after { content: ''; position: fixed; inset: 0; z-index: 999; background: rgba(22, 17, 13, .55); }
 }
 @media (max-width: 599px) {
-  .header__topbar-right:has(a[href^="tel"]) a[href^="mailto"] { display: none; }
+  .header__topbar-right:has(a[href^="tel"]) .topbar__item--mail { display: none; }
+  .header__topbar-inner { justify-content: space-between; }
+  .header__topbar-right { width: 100%; justify-content: space-between; gap: .75rem; }
+  .topbar__cta { padding: .3rem .6rem; letter-spacing: .08em; }
+}
+@media (max-width: 420px) {
+  .topbar__item--mail .topbar__link { font-size: 0 !important; gap: 0; }
+  .topbar__item--mail svg { width: 18px; height: 18px; }
 }
 @media (max-width: 480px) {
   .logo__name { font-size: 1.28rem; }
@@ -431,6 +452,20 @@ p { text-wrap: pretty; }
 .checkbox-label a { color: var(--brass-dark); text-decoration: underline; text-underline-offset: 2px; }
 .form-hero .btn { margin-top: .35rem; }
 .contact-form { max-width: 640px; margin-top: 1.75rem; }
+.form-row { display: grid; gap: 1.05rem; }
+@media (min-width: 600px) { .form-row--2 { grid-template-columns: 1fr 1fr; } }
+.form-hint { font-size: .78rem; color: var(--muted); }
+.form-group input[type="file"] { padding: .7rem; font-size: .88rem; background: var(--linen); border-style: dashed; cursor: pointer; }
+.form-group input[type="file"]::file-selector-button {
+  margin-right: .8rem; padding: .45rem .8rem; border: 1px solid var(--line); background: #fff; color: var(--ink);
+  font: inherit; font-weight: 600; cursor: pointer;
+}
+.form-group select[aria-invalid="true"] { border-color: #B3261E; }
+.form-files { font-size: .78rem; color: var(--text); }
+.form-files:empty { display: none; }
+.form-legal { font-size: .72rem; line-height: 1.55; color: var(--muted); margin: -.25rem 0 0; }
+.form-legal a { color: var(--brass-dark); text-decoration: underline; text-underline-offset: 2px; }
+.form-assurance { font-size: .78rem; color: var(--muted); text-align: center; margin-top: -.25rem; }
 
 /* ── 10. TRUST BAR ─────────────────────────────────────────── */
 .trust-bar { background: var(--paper); border-bottom: 1px solid var(--line); }
@@ -582,32 +617,19 @@ p { text-wrap: pretty; }
 }
 .trabajo-card__desc::before { content: ''; display: block; width: 1.75rem; height: 1px; background: var(--brass-light); margin-bottom: .7rem; }
 
-/* ── 18. TESTIMONIOS ───────────────────────────────────────── */
-.google-badge {
-  display: inline-flex; align-items: center; gap: .75rem; margin-top: 1rem;
-  padding: .6rem 1.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 999px;
-  font-size: .78rem; font-weight: 600; color: var(--text);
-}
-.google-badge__stars { display: flex; align-items: center; gap: .18rem; padding-left: .75rem; border-left: 1px solid var(--line); }
-.google-badge__stars strong { margin-left: .35rem; font-size: .85rem; }
-.google-badge__stars svg, .testimonio-card__stars svg { fill: var(--brass); }
+/* ── 18. COMPROMISOS (tarjetas de garantía) ───────────────── */
 .grid-testimonios { display: grid; gap: clamp(1.25rem, 2.4vw, 2rem); text-align: left; }
 @media (min-width: 768px) { .grid-testimonios { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .grid-testimonios { grid-template-columns: repeat(3, 1fr); } }
 .testimonio-card {
-  position: relative; display: flex; flex-direction: column; gap: 1.25rem;
+  position: relative; display: flex; flex-direction: column; gap: 1rem;
   background: var(--paper); border: 1px solid var(--line-soft); padding: clamp(2rem, 3vw, 2.6rem);
 }
-.testimonio-card::before {
-  content: '\201C'; position: absolute; right: 1.5rem; top: .25rem;
-  font-family: var(--font-display); font-size: 6.5rem; line-height: 1; color: var(--brass); opacity: .35;
-}
-.testimonio-card__stars { display: flex; gap: .2rem; }
-.testimonio-card__stars svg { width: 13px; height: 13px; }
-.testimonio-card__text p { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: clamp(1.25rem, 1.7vw, 1.42rem); line-height: 1.45; color: var(--ink); }
-.testimonio-card__author { display: flex; flex-direction: column; gap: .2rem; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--line-soft); }
-.testimonio-card__author strong { font-size: .78rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--text); }
-.testimonio-card__author span { font-size: .82rem; color: var(--muted); }
+.compromiso-card__num { font-family: var(--font-display); font-size: 3rem; line-height: 1; color: var(--brass); opacity: .6; }
+.compromiso-card h3 { font-size: clamp(1.35rem, 1.8vw, 1.55rem); font-weight: 500; line-height: 1.25; }
+.compromiso-card p { color: var(--muted); font-size: .96rem; }
+.form-group--checkbox { flex-wrap: wrap; }
+.form-group--checkbox .field-error { flex-basis: 100%; }
 
 /* ── 19. ZONAS ─────────────────────────────────────────────── */
 .zones-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; max-width: 900px; margin-inline: auto; }

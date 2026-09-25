@@ -4,6 +4,7 @@ const CONFIG = {
   "schemaType": "HomeAndConstructionBusiness",
   "priceRange": "€€",
   "since": "2006",
+  "foundingDate": "2006",
   "address": {
     "street": "Calle Portal de Gamarra, 14, nave 3",
     "city": "Vitoria-Gasteiz",
@@ -11,6 +12,8 @@ const CONFIG = {
     "postalCode": "01013",
     "country": "ES"
   },
+  "workshopNote": "Taller de fabricación sin exposición al público: visitas al taller solo con cita previa",
+  "areaLabel": "Polígono de Gamarra, Vitoria-Gasteiz",
   "phone": "",
   "phoneDisplay": "",
   "whatsapp": "",
@@ -41,6 +44,8 @@ const CONFIG = {
       "closes": "19:30"
     }
   ],
+  "hoursNote": "Sábados, visitas y mediciones con cita previa",
+  "responseTime": "Respuesta en 24–48 h laborables",
   "geo": {
     "lat": 42.8584,
     "lng": -2.6691
@@ -51,10 +56,6 @@ const CONFIG = {
   "gtagId": "",
   "mapsEmbedUrl": "https://maps.google.com/maps?q=Calle+Portal+de+Gamarra+14%2C+01013+Vitoria-Gasteiz%2C+%C3%81lava&t=&z=15&ie=UTF8&iwloc=&output=embed",
   "sameAs": [],
-  "rating": {
-    "value": "4.9",
-    "count": "47"
-  },
   "services": [
     {
       "name": "Armarios a medida",
@@ -79,6 +80,10 @@ const CONFIG = {
     {
       "name": "Armarios esquineros a medida",
       "slug": "armarios-a-medida/esquineros"
+    },
+    {
+      "name": "Puertas e interiores de armario a medida",
+      "slug": "armarios-a-medida/puertas-e-interiores"
     },
     {
       "name": "Cocinas a medida",
@@ -138,5 +143,30 @@ const CONFIG = {
       "name": "Legutiano",
       "slug": "legutiano"
     }
+  ],
+  "legal": {
+    "owner": "",
+    "nif": ""
+  },
+  "author": {
+    "id": "gorka-saez-de-argandona",
+    "name": "Gorka Sáez de Argandoña",
+    "jobTitle": "Ebanista y diseñador de mobiliario a medida",
+    "image": "/img/equipo/autor.webp",
+    "sameAs": []
+  },
+  "knowsAbout": [
+    "Muebles a medida",
+    "Carpintería a medida",
+    "Ebanistería",
+    "Armarios empotrados",
+    "Vestidores",
+    "Cocinas a medida",
+    "Muebles de baño",
+    "Muebles de salón",
+    "Melamina",
+    "MDF lacado",
+    "Madera maciza",
+    "Chapa natural de roble y nogal"
   ]
 };

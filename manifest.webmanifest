@@ -1,0 +1,22 @@
+{
+  "name": "Muebles a medida en Vitoria",
+  "short_name": "Muebles Vitoria",
+  "description": "Diseño, fabricación propia e instalación de muebles a medida en Vitoria-Gasteiz y Álava.",
+  "lang": "es",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1E2A44",
+  "icons": [
+    {
+      "src": "/img/icon-192.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    },
+    {
+      "src": "/img/icon-512.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+}

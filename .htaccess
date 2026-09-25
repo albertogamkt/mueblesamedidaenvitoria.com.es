@@ -1,0 +1,83 @@
+# ════════════════════════════════════════════════════════════
+# .htaccess — Rank & Rent · Production Server Config
+# ════════════════════════════════════════════════════════════
+
+Options -Indexes
+RewriteEngine On
+
+# ── 1. FORZAR HTTPS (siempre primero) ─────────────────────
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── 2. ELIMINAR www → dominio raíz ────────────────────────
+# (Descomenta UNA de las dos opciones según convenga)
+# Sin www:
+# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+# RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+# Con www:
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── 2b. REDIRECCIONES 301 — reestructura armarios (subtipos anidados) ──
+RewriteRule ^armarios-empotrados-a-medida/?$ /armarios-a-medida/empotrados/ [R=301,L]
+RewriteRule ^vestidores-a-medida/?$ /armarios-a-medida/vestidores/ [R=301,L]
+
+# ── 3. HOME en dominio raíz (redirigir /index.html → /) ───
+RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+RewriteRule ^ / [R=301,L]
+
+# ── 4. URLS LIMPIAS: redirigir /pagina.html → /pagina ─────
+RewriteCond %{THE_REQUEST} \s/(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# ── 5. REESCRITURA INTERNA: /pagina → /pagina.html ────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# ── 6. TRAILING SLASH: /pagina/ → /pagina ─────────────────
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# ── 7. COMPRESIÓN GZIP ────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript
+  AddOutputFilterByType DEFLATE application/json image/svg+xml
+</IfModule>
+
+# ── 8. CACHÉ DE ACTIVOS ESTÁTICOS ────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                 "access plus 1 hour"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/avif                "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/svg+xml            "access plus 1 year"
+  ExpiresByType font/woff2               "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+# ── 9. CABECERAS DE SEGURIDAD ─────────────────────────────
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+  <FilesMatch "\.(css|js|webp|avif|jpg|png|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# ── 10. BLOQUEAR ARCHIVOS SENSIBLES ──────────────────────
+<FilesMatch "(\.htaccess|\.htpasswd|plan\.md|config\.js|\.env)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# ── 11. ERRORES PERSONALIZADOS ────────────────────────────
+ErrorDocument 404 /404.html
+ErrorDocument 403 /index.html

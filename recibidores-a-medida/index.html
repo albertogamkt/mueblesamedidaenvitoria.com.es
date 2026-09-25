@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link rel="preload" as="image" href="../img/servicios/recibidores-a-medida-banner.webp" fetchpriority="high">
 
@@ -28,15 +26,16 @@
   <meta name="geo.placename" content="Vitoria-Gasteiz">
   <meta name="geo.position" content="42.8584;-2.6691">
 
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Mulish:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Mulish:wght@400;500;600;700&display=swap"></noscript>
+<!-- @head-assets -->
+  <link rel="preload" href="../fonts/cormorant-garamond-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/manrope-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.min.css?v=b3519f96">
 
-  <link rel="preload" href="../css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="../css/style.css"></noscript>
-
-  <link rel="icon" type="image/webp" href="../img/favicon.webp">
+  <meta name="theme-color" content="#16110D">
+  <link rel="icon" type="image/svg+xml" href="../img/favicon.svg">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.webp">
   <link rel="manifest" href="../manifest.webmanifest">
+  <!-- /@head-assets -->
 
   <!-- JSON-LD inline (negocio) — schema.js amplía el grafo (Service + Breadcrumb + FAQ) con el mismo @id -->
   <script type="application/ld+json">
@@ -47,46 +46,39 @@
   <a href="#contenido-principal" class="skip-link">Saltar al contenido</a>
 
   <!-- ════════ HEADER GLOBAL (idéntico en todo el sitio) ════════ -->
+  <!-- @header -->
   <header class="site-header" role="banner">
     <div class="header__topbar">
       <div class="container header__topbar-inner">
-        <div class="header__topbar-left">
+        <p class="topbar__claim">Taller propio en Vitoria-Gasteiz · Fabricamos desde 2006</p>
+        <div class="header__topbar-right">
+          
           <a href="mailto:info@mueblesamedidaenvitoria.com.es" class="topbar__link">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 6 10 7 10-7"/></svg>
             info@mueblesamedidaenvitoria.com.es
           </a>
           <span class="topbar__info">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             L-V 09:00–13:30 · 16:00–19:30
-          </span>
-        </div>
-        <div class="header__topbar-right">
-          <span class="topbar__info">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            Vitoria-Gasteiz y toda Álava
           </span>
         </div>
       </div>
     </div>
 
     <div class="header__main container">
-      <a href="../" class="header__logo" aria-label="Volver al inicio — Muebles a medida en Vitoria">
-        <svg class="logo-svg" viewBox="0 0 214 48" width="214" height="48" role="img" aria-label="Muebles a medida en Vitoria">
-          <rect x="2" y="6" width="36" height="36" rx="5" fill="#1E2A44"/>
-          <rect x="9" y="12" width="22" height="9.5" rx="2" fill="none" stroke="#8DC63F" stroke-width="2"/>
-          <rect x="9" y="26" width="22" height="9.5" rx="2" fill="none" stroke="#8DC63F" stroke-width="2"/>
-          <circle cx="26.5" cy="16.75" r="1.4" fill="#8DC63F"/>
-          <circle cx="26.5" cy="30.75" r="1.4" fill="#8DC63F"/>
-          <text x="48" y="23" font-family="Poppins, sans-serif" font-size="17" font-weight="700" fill="#1E2A44">Muebles a medida</text>
-          <text x="48" y="38" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" letter-spacing="2.5" fill="#2F4068">EN VITORIA-GASTEIZ</text>
-        </svg>
+      <a href="../" class="logo header__logo" aria-label="Inicio — Muebles a medida en Vitoria-Gasteiz">
+        <svg class="logo__mark" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><rect x=".75" y=".75" width="38.5" height="38.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="8.5" y="7" width="23" height="26" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M20 7v26" stroke="currentColor" stroke-width="1.2"/><path d="M17.3 17.5v5M22.7 17.5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="logo__text">
+          <span class="logo__name">Muebles a Medida</span>
+          <span class="logo__sub">Vitoria-Gasteiz</span>
+        </span>
       </a>
 
       <nav class="nav-main" id="nav-menu" aria-label="Navegación principal">
         <ul role="list">
           <li class="has-dropdown">
             <button aria-expanded="false" aria-controls="submenu-servicios">Servicios</button>
-            <ul id="submenu-servicios" role="list">
+            <ul id="submenu-servicios" class="submenu submenu--mega" role="list">
               <li class="submenu-group">
                 <a href="../armarios-a-medida/">Armarios a medida</a>
                 <ul class="submenu-sub" role="list">
@@ -101,15 +93,15 @@
               <li><a href="../banos-a-medida/">Muebles de baño a medida</a></li>
               <li><a href="../muebles-de-salon-a-medida/">Muebles de salón</a></li>
               <li><a href="../dormitorios-a-medida/">Muebles de dormitorio</a></li>
-              <li><a href="../habitaciones-juveniles-a-medida/">Muebles para habitaciones juveniles</a></li>
-              <li><a href="../escritorios-y-mobiliario-de-oficina-a-medida/">Muebles de escritorio y oficina</a></li>
+              <li><a href="../habitaciones-juveniles-a-medida/">Habitaciones juveniles</a></li>
+              <li><a href="../escritorios-y-mobiliario-de-oficina-a-medida/">Escritorio y oficina</a></li>
               <li><a href="../recibidores-a-medida/" aria-current="page">Recibidores a medida</a></li>
               <li><a href="../mesas-a-medida/">Mesas a medida</a></li>
             </ul>
           </li>
           <li class="has-dropdown">
             <button aria-expanded="false" aria-controls="submenu-zonas">Zonas</button>
-            <ul id="submenu-zonas" role="list">
+            <ul id="submenu-zonas" class="submenu" role="list">
               <li><a href="../laudio-llodio/">Laudio/Llodio</a></li>
               <li><a href="../amurrio/">Amurrio</a></li>
               <li><a href="../agurain-salvatierra/">Agurain/Salvatierra</a></li>
@@ -121,16 +113,25 @@
           <li><a href="../trabajos/">Trabajos</a></li>
           <li><a href="../nosotros/">Nosotros</a></li>
           <li><a href="../blog/">Blog</a></li>
+          <li><a href="../contacto/">Contacto</a></li>
         </ul>
+        <div class="nav-main__footer">
+          <a href="../presupuesto/" class="btn btn--primary btn--full">Pedir presupuesto</a>
+          
+          <a href="mailto:info@mueblesamedidaenvitoria.com.es" class="nav-main__contact">info@mueblesamedidaenvitoria.com.es</a>
+        </div>
       </nav>
 
-      <a href="../presupuesto/" class="btn btn--primary btn--sm header__cta">Pedir presupuesto</a>
-
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      </button>
+      <div class="header__actions">
+        
+        <a href="../presupuesto/" class="btn btn--primary btn--sm header__cta">Pedir presupuesto</a>
+        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+          <span class="nav-toggle__bar" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
   </header>
+  <!-- /@header -->
 
   <main id="contenido-principal">
 
@@ -354,8 +355,8 @@
     <section class="section" aria-label="Recibidor a medida instalado">
       <div class="container">
         <picture>
-          <source srcset="/img/servicios/recibidores-a-medida-banner.avif" type="image/avif">
-          <source srcset="/img/servicios/recibidores-a-medida-banner.webp" type="image/webp">
+          <source srcset="../img/servicios/recibidores-a-medida-banner.avif" type="image/avif">
+          <source srcset="../img/servicios/recibidores-a-medida-banner.webp" type="image/webp">
           <img src="../img/servicios/recibidores-a-medida-banner.jpg"
                alt="Recibidor a medida con zapatero de poco fondo, banco con almacenaje y espejo en la entrada de una vivienda de Vitoria-Gasteiz"
                width="1200" height="400" fetchpriority="high"
@@ -446,24 +447,24 @@
         <div class="grid-trabajos">
           <figure class="trabajo-card">
             <picture>
-              <source srcset="/img/trabajos/mueble-bajo-escalera-laudio.avif" type="image/avif">
-              <source srcset="/img/trabajos/mueble-bajo-escalera-laudio.webp" type="image/webp">
+              <source srcset="../img/trabajos/mueble-bajo-escalera-laudio.avif" type="image/avif">
+              <source srcset="../img/trabajos/mueble-bajo-escalera-laudio.webp" type="image/webp">
               <img src="../img/trabajos/mueble-bajo-escalera-laudio.jpg" alt="Recibidor a medida aprovechando el hueco bajo la escalera con armario de entrada cerrado en Laudio/Llodio" width="400" height="300" loading="lazy">
             </picture>
             <figcaption class="trabajo-card__desc">Recibidor bajo escalera con armario de entrada en Laudio/Llodio.</figcaption>
           </figure>
           <figure class="trabajo-card">
             <picture>
-              <source srcset="/img/trabajos/armario-corredera-casco-viejo.avif" type="image/avif">
-              <source srcset="/img/trabajos/armario-corredera-casco-viejo.webp" type="image/webp">
+              <source srcset="../img/trabajos/armario-corredera-casco-viejo.avif" type="image/avif">
+              <source srcset="../img/trabajos/armario-corredera-casco-viejo.webp" type="image/webp">
               <img src="../img/trabajos/armario-corredera-casco-viejo.jpg" alt="Recibidor a medida de poco fondo con puertas correderas para una entrada estrecha en el Casco Viejo de Vitoria" width="400" height="300" loading="lazy">
             </picture>
             <figcaption class="trabajo-card__desc">Recibidor de fondo reducido con correderas en el Casco Viejo.</figcaption>
           </figure>
           <figure class="trabajo-card">
             <picture>
-              <source srcset="/img/trabajos/mueble-salon-zaramaga.avif" type="image/avif">
-              <source srcset="/img/trabajos/mueble-salon-zaramaga.webp" type="image/webp">
+              <source srcset="../img/trabajos/mueble-salon-zaramaga.avif" type="image/avif">
+              <source srcset="../img/trabajos/mueble-salon-zaramaga.webp" type="image/webp">
               <img src="../img/trabajos/mueble-salon-zaramaga.jpg" alt="Recibidor a medida con banco con almacenaje, zapatero y espejo a juego con el salón en Zaramaga, Vitoria" width="400" height="300" loading="lazy">
             </picture>
             <figcaption class="trabajo-card__desc">Recibidor con banco, zapatero y espejo en Zaramaga.</figcaption>
@@ -640,25 +641,28 @@
   </main>
 
   <!-- ════════ FOOTER GLOBAL ════════ -->
+  <!-- @footer -->
   <footer class="footer" role="contentinfo">
     <div class="container">
+      <div class="footer__top">
+        <p class="footer__statement">Muebles que se diseñan para tu casa, <em>no para un catálogo</em>.</p>
+        <p class="footer__cta-note">Visita, medición y render 3D sin coste.<br><a href="../presupuesto/">Solicitar presupuesto →</a></p>
+      </div>
+
       <div class="footer__grid">
-        <div class="footer__col">
-          <a href="../" class="header__logo" aria-label="Volver al inicio — Muebles a medida en Vitoria">
-            <svg class="logo-svg" viewBox="0 0 214 48" width="200" height="45" role="img" aria-label="Muebles a medida en Vitoria">
-              <rect x="2" y="6" width="36" height="36" rx="5" fill="#fff"/>
-              <rect x="9" y="12" width="22" height="9.5" rx="2" fill="none" stroke="#8DC63F" stroke-width="2"/>
-              <rect x="9" y="26" width="22" height="9.5" rx="2" fill="none" stroke="#8DC63F" stroke-width="2"/>
-              <circle cx="26.5" cy="16.75" r="1.4" fill="#8DC63F"/>
-              <circle cx="26.5" cy="30.75" r="1.4" fill="#8DC63F"/>
-              <text x="48" y="23" font-family="Poppins, sans-serif" font-size="17" font-weight="700" fill="#fff">Muebles a medida</text>
-              <text x="48" y="38" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" letter-spacing="2.5" fill="#8DC63F">EN VITORIA-GASTEIZ</text>
-            </svg>
+        <div class="footer__col footer__col--brand">
+          <a href="../" class="logo logo--light" aria-label="Inicio — Muebles a medida en Vitoria-Gasteiz">
+            <svg class="logo__mark" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><rect x=".75" y=".75" width="38.5" height="38.5" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="8.5" y="7" width="23" height="26" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M20 7v26" stroke="currentColor" stroke-width="1.2"/><path d="M17.3 17.5v5M22.7 17.5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span class="logo__text">
+              <span class="logo__name">Muebles a Medida</span>
+              <span class="logo__sub">Vitoria-Gasteiz</span>
+            </span>
           </a>
-          <p class="footer__desc">Diseño, fabricación propia e instalación de muebles a medida en Vitoria-Gasteiz y Álava.</p>
+          <p class="footer__desc">Diseño, fabricación propia e instalación de muebles a medida en Vitoria-Gasteiz y toda Álava.</p>
           <address>
             Calle Portal de Gamarra, 14, nave 3<br>
             01013 Vitoria-Gasteiz (Álava)<br>
+            
             <a href="mailto:info@mueblesamedidaenvitoria.com.es">info@mueblesamedidaenvitoria.com.es</a><br>
             L-V 09:00–13:30 · 16:00–19:30
           </address>
@@ -712,22 +716,27 @@
       </div>
     </div>
   </footer>
+  <!-- /@footer -->
 
   <!-- Barra CTA sticky mobile (negocio sin teléfono: email + presupuesto) -->
+  <!-- @mobile-bar -->
   <div class="mobile-cta-bar" role="complementary" aria-label="Acciones rápidas">
+    
+    
     <a href="mailto:info@mueblesamedidaenvitoria.com.es" class="cta-btn cta-btn--email">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 6 10 7 10-7"/></svg>
       Email
     </a>
     <a href="#presupuesto" class="cta-btn cta-btn--budget">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      Presupuesto
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg>
+      Presupuesto<span class="cta-btn__extra">&nbsp;gratis</span>
     </a>
   </div>
+  <!-- /@mobile-bar -->
 
-  <script src="../js/config.js" defer></script>
-  <script src="../js/schema.js" defer></script>
-  <script src="../js/tracking.js" defer></script>
-  <script src="../js/main.js" defer></script>
+  <script src="../js/config.js?v=a665b5ca" defer></script>
+  <script src="../js/schema.js?v=95590050" defer></script>
+  <script src="../js/tracking.js?v=64c3153b" defer></script>
+  <script src="../js/main.js?v=78e524a3" defer></script>
 </body>
 </html>

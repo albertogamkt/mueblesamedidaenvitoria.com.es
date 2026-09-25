@@ -200,6 +200,10 @@
   var forms = document.querySelectorAll('form[action$="mail.php"], form#contact-form');
   if (!forms.length) return;
 
+  // Raíz real del sitio (funciona en dominio propio y en subcarpetas de preview)
+  var home = document.querySelector('.header__logo');
+  var siteRoot = home ? home.href.replace(/[^/]*$/, '') : '/';
+
   function validate(form) {
     var valid = true;
     var first = null;
@@ -242,10 +246,10 @@
       if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
       if (errMsg) errMsg.style.display = 'none';
 
-      fetch('/mail.php', { method: 'POST', body: new FormData(form) })
+      fetch(siteRoot + 'mail.php', { method: 'POST', body: new FormData(form) })
         .then(function (r) {
           if (r.ok || r.redirected || r.url.indexOf('gracias') !== -1) {
-            window.location.href = '/gracias/';
+            window.location.href = siteRoot + 'gracias/';
           } else { throw new Error('server'); }
         })
         .catch(function () {
@@ -253,6 +257,62 @@
           if (btn) { btn.disabled = false; btn.textContent = label; }
         });
     });
+  });
+})();
+
+
+// ════════════════════════════════════════════════════════════
+// FOTOS PENDIENTES — si una imagen no existe, se sustituye por un
+// panel de material (sin icono roto) manteniendo su proporción.
+// ════════════════════════════════════════════════════════════
+
+(function () {
+  function markMissing(img) {
+    var box = img.parentElement && img.parentElement.tagName === 'PICTURE' ? img.parentElement : img;
+    var holder = box === img ? img.parentElement : box;
+    if (!holder || holder.classList.contains('media-missing')) return;
+    var w = img.getAttribute('width'), h = img.getAttribute('height');
+    if (w && h) holder.style.setProperty('--ar', w + ' / ' + h);
+    holder.classList.add('media-missing');
+  }
+
+  document.querySelectorAll('main img, .post-figure img').forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0) markMissing(img);
+    img.addEventListener('error', function () { markMissing(img); }, { once: true });
+  });
+})();
+
+
+// ════════════════════════════════════════════════════════════
+// ENTRADA SUAVE AL HACER SCROLL — solo elementos fuera de pantalla,
+// para no provocar parpadeos ni afectar al LCP.
+// ════════════════════════════════════════════════════════════
+
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var selector = [
+    '.section-content', '.service-card', '.feature-card', '.precio-card', '.step',
+    '.trabajo-card', '.testimonio-card', '.blog-card', '.about__media', '.about__content',
+    '.benefit-list li', '.faq-list', '.prose', '.cta-final', '.cta-band > .container', '.zones-grid'
+  ].join(',');
+
+  var fold = window.innerHeight * 0.92;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+
+  document.querySelectorAll(selector).forEach(function (el) {
+    if (el.getBoundingClientRect().top < fold) return;
+    var siblings = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+    el.style.transitionDelay = Math.min(siblings % 3, 2) * 90 + 'ms';
+    el.classList.add('reveal');
+    io.observe(el);
   });
 })();
 

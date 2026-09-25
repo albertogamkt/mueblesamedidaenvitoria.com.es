@@ -73,10 +73,11 @@ RewriteRule ^(.*)/$ /$1 [R=301,L]
 </IfModule>
 
 # ── 10. BLOQUEAR ARCHIVOS SENSIBLES ──────────────────────
-<FilesMatch "(\.htaccess|\.htpasswd|plan\.md|config\.js|\.env)$">
+<FilesMatch "(\.htaccess|\.htpasswd|\.md|site\.config\.json|\.build-state\.json|\.py|\.env)$">
   Order Allow,Deny
   Deny from all
 </FilesMatch>
+RedirectMatch 404 ^/(tools|partials)(/.*)?$
 
 # ── 11. ERRORES PERSONALIZADOS ────────────────────────────
 ErrorDocument 404 /404.html

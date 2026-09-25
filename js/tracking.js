@@ -40,10 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ── Form submit tracking ─────────────────────────────────────────
-  // Todos los formularios del sitio envían a /mail.php (hero, contacto, blog).
-  document.querySelectorAll('form[action$="mail.php"], form#contact-form').forEach(function (form) {
-    form.addEventListener('submit', function () {
-      if (form.querySelector('[name="_gotcha"]') && form.querySelector('[name="_gotcha"]').value) return;
+  // Todos los formularios del sitio envían a /mail.php; main.js emite 'lead:sent' solo si el envío fue correcto.
+  document.querySelectorAll('form[action$="mail.php"]').forEach(function (form) {
+    form.addEventListener('lead:sent', function () {
       var page = form.querySelector('[name="page"]');
       if (typeof gtag !== 'undefined') {
         gtag('event', 'form_submit', { event_category: 'lead', event_label: page ? page.value : '' });
@@ -54,14 +53,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ── UTM fields auto-fill ─────────────────────────────────────────
+  // ── UTM: se guardan en la sesión y se copian a los campos ocultos del formulario ──
   var params = new URLSearchParams(window.location.search);
   ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (param) {
-    var field = document.getElementById('form-' + param);
-    if (field && params.get(param)) field.value = params.get(param);
+    var value = params.get(param);
+    try {
+      if (value) sessionStorage.setItem(param, value);
+      else value = sessionStorage.getItem(param);
+    } catch (e) { /* almacenamiento no disponible */ }
+    if (!value) return;
+    document.querySelectorAll('form [name="' + param + '"]').forEach(function (field) { field.value = value; });
   });
-  var pageField = document.getElementById('form-page');
-  if (pageField) pageField.value = window.location.pathname;
 
   // ── GTM / gtag loader (carga tras interacción del usuario) ───────
   if (typeof CONFIG !== 'undefined') {

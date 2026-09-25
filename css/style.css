@@ -213,9 +213,12 @@ p { text-wrap: pretty; }
 }
 .topbar__cta:hover { background: var(--brass-light); }
 .nav-main__meta { display: none; }
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .topbar__claim, .topbar__item--place { display: none; }
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .topbar__claim { display: none; }
   .header__topbar-inner { justify-content: flex-end; }
+}
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .header__topbar-right > .topbar__item--place { display: none; }
 }
 
 .header__main { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 84px; transition: min-height .4s var(--ease); }
@@ -288,8 +291,6 @@ p { text-wrap: pretty; }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bar::after { transform: rotate(-45deg); background: var(--ink); }
 
 @media (min-width: 1024px) and (max-width: 1279px) {
-  .topbar__claim, .header__topbar .topbar__info { display: none; }
-  .header__topbar-inner { justify-content: flex-end; }
   .header__main { gap: 1rem; }
   .nav-main a, .nav-main button { padding-inline: .55rem; letter-spacing: .12em; }
   .nav-main > ul > li > a::after, .nav-main > ul > li > button::before { left: .55rem; right: .55rem; }
@@ -327,7 +328,7 @@ p { text-wrap: pretty; }
   .submenu-sub a { padding-left: .85rem; }
   .nav-main__footer { display: grid; gap: .9rem; margin-top: auto; padding-top: 2rem; }
   .nav-main__meta { display: block; font-size: .8rem; line-height: 1.6; color: var(--muted); text-align: center; }
-  .topbar__item--place, .topbar__item--hours { display: none !important; }
+  .header__topbar-right > .topbar__item--place, .header__topbar-right > .topbar__item--hours { display: none; }
   .nav-main__contact { font-size: .9rem !important; font-weight: 600 !important; letter-spacing: .02em !important; text-transform: none !important; color: var(--muted) !important; text-align: center; padding: .25rem !important; }
   body.menu-open { overflow: hidden; }
   body.menu-open::after { content: ''; position: fixed; inset: 0; z-index: 999; background: rgba(22, 17, 13, .55); }

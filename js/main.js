@@ -192,17 +192,33 @@
 
 // ════════════════════════════════════════════════════════════
 // FORMULARIOS — Validación accesible + envío AJAX a /mail.php
-// Cubre todos los formularios del sitio (hero compacto + contacto).
-// Negocio sin teléfono: el tel es opcional, el email es el canal.
+// Todos los campos son obligatorios salvo las fotos. Las fotos se
+// reducen en el navegador (máx. 1920 px, JPEG) antes de enviarlas.
 // ════════════════════════════════════════════════════════════
 
 (function () {
-  var forms = document.querySelectorAll('form[action$="mail.php"], form#contact-form');
+  var forms = document.querySelectorAll('form[action$="mail.php"]');
   if (!forms.length) return;
 
-  // Raíz real del sitio (funciona en dominio propio y en subcarpetas de preview)
-  var home = document.querySelector('.header__logo');
-  var siteRoot = home ? home.href.replace(/[^/]*$/, '') : '/';
+  var RESIZABLE = /^image\/(jpeg|png|webp)$/;
+  var MAX_SIDE = 1920;
+
+  function fileField(form) { return form.querySelector('input[type="file"]'); }
+
+  function checkFiles(input) {
+    if (!input || !input.files) return true;
+    var max = parseInt(input.dataset.maxFiles || '6', 10);
+    var maxMb = parseFloat(input.dataset.maxMb || '10');
+    if (input.files.length > max) return false;
+    for (var i = 0; i < input.files.length; i++) {
+      var f = input.files[i];
+      var okType = /^image\//.test(f.type) || f.type === 'application/pdf' || /\.(heic|heif)$/i.test(f.name);
+      // las fotos grandes se comprimen antes de enviar; el límite estricto aplica a PDF/HEIC
+      var needsLimit = !RESIZABLE.test(f.type);
+      if (!okType || (needsLimit && f.size > maxMb * 1048576)) return false;
+    }
+    return true;
+  }
 
   function validate(form) {
     var valid = true;
@@ -212,18 +228,19 @@
       if (field.type === 'hidden' || field.name === '_gotcha') return;
       var group = field.closest('.form-group') || field.parentNode;
       var error = group.querySelector('.field-error');
+      var value = (field.value || '').trim();
       var ok    = true;
 
       if (field.hasAttribute('required')) {
-        if (field.type === 'checkbox') ok = field.checked;
-        else ok = field.value.trim().length > 0;
+        ok = field.type === 'checkbox' ? field.checked : value.length > 0;
       }
-      if (ok && field.type === 'email' && field.value.trim()) {
-        ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+      if (ok && field.type === 'email' && value) {
+        ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
       }
-      if (ok && field.type === 'tel' && field.value.trim()) {
-        ok = /^[\d\s+\-]{9,15}$/.test(field.value.trim());
+      if (ok && field.type === 'tel' && value) {
+        ok = /^\+?[\d\s\-().]{9,20}$/.test(value) && value.replace(/\D/g, '').length >= 9;
       }
+      if (ok && field.type === 'file') ok = checkFiles(field);
 
       if (field.type !== 'checkbox') field.setAttribute('aria-invalid', String(!ok));
       if (error) error.textContent = ok ? '' : (field.dataset.error || 'Revisa este campo');
@@ -234,7 +251,54 @@
     return valid;
   }
 
+  function resize(file) {
+    return new Promise(function (resolve) {
+      if (!RESIZABLE.test(file.type) || !window.createImageBitmap) return resolve(file);
+      createImageBitmap(file).then(function (bmp) {
+        var scale = Math.min(1, MAX_SIDE / Math.max(bmp.width, bmp.height));
+        var canvas = document.createElement('canvas');
+        canvas.width = Math.round(bmp.width * scale);
+        canvas.height = Math.round(bmp.height * scale);
+        canvas.getContext('2d').drawImage(bmp, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(function (blob) {
+          if (!blob || blob.size >= file.size) return resolve(file);
+          resolve(new File([blob], file.name.replace(/\.\w+$/, '') + '.jpg', { type: 'image/jpeg' }));
+        }, 'image/jpeg', 0.82);
+      }).catch(function () { resolve(file); });
+    });
+  }
+
+  function buildData(form) {
+    var data = new FormData(form);
+    var input = fileField(form);
+    if (!input || !input.files || !input.files.length) return Promise.resolve(data);
+    data.delete(input.name);
+    return Promise.all(Array.prototype.map.call(input.files, resize)).then(function (files) {
+      files.forEach(function (f) { data.append(input.name, f, f.name); });
+      return data;
+    });
+  }
+
+  // Envío sin JS que volvió con error (/contacto/?error=…): mostrar el aviso
+  if (/[?&]error=/.test(window.location.search)) {
+    var note = forms[0].querySelector('.form-send-error');
+    if (note) note.style.display = 'block';
+  }
+
   forms.forEach(function (form) {
+    var ts = form.querySelector('[name="_ts"]');
+    if (ts) ts.value = String(Date.now());
+
+    var input = fileField(form);
+    var list = form.querySelector('.form-files');
+    if (input && list) {
+      input.addEventListener('change', function () {
+        var names = Array.prototype.map.call(input.files, function (f) { return f.name; });
+        list.textContent = names.length ? names.length + ' archivo(s): ' + names.join(', ') : '';
+        validate(form);
+      });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!validate(form)) return;
@@ -246,11 +310,15 @@
       if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
       if (errMsg) errMsg.style.display = 'none';
 
-      fetch(siteRoot + 'mail.php', { method: 'POST', body: new FormData(form) })
-        .then(function (r) {
-          if (r.ok || r.redirected || r.url.indexOf('gracias') !== -1) {
-            window.location.href = siteRoot + 'gracias/';
-          } else { throw new Error('server'); }
+      buildData(form)
+        .then(function (data) {
+          return fetch('/mail.php', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        })
+        .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.error || 'server');
+          form.dispatchEvent(new CustomEvent('lead:sent', { bubbles: true }));
+          setTimeout(function () { window.location.href = '/gracias/'; }, 300);
         })
         .catch(function () {
           if (errMsg) errMsg.style.display = 'block';
